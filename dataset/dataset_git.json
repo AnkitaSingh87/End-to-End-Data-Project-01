@@ -1,0 +1,31 @@
+{
+	"name": "dataset_git",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "git_connection",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Relative_par": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().Relative_par",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
