@@ -1,0 +1,78 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ank-factory"
+		},
+		"datalake_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'datalake'"
+		},
+		"project01-synapse-WorkspaceDefaultSqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'project01-synapse-WorkspaceDefaultSqlServer'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:project01-synapse.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"datalake_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalakeank01.dfs.core.windows.net/"
+		},
+		"git_connection_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com"
+		},
+		"project01-synapse-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://defaultstoragesynapse.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ank-factory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"datalake_accountKey": {
+						"value": "[parameters('datalake_accountKey')]"
+					},
+					"project01-synapse-WorkspaceDefaultSqlServer_connectionString": {
+						"value": "[parameters('project01-synapse-WorkspaceDefaultSqlServer_connectionString')]"
+					},
+					"datalake_properties_typeProperties_url": {
+						"value": "[parameters('datalake_properties_typeProperties_url')]"
+					},
+					"git_connection_properties_typeProperties_url": {
+						"value": "[parameters('git_connection_properties_typeProperties_url')]"
+					},
+					"project01-synapse-WorkspaceDefaultStorage_properties_typeProperties_url": {
+						"value": "[parameters('project01-synapse-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

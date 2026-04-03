@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ank-factory"
+		},
+		"datalake_accountKey": {
+			"value": ""
+		},
+		"project01-synapse-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:project01-synapse.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"datalake_properties_typeProperties_url": {
+			"value": "https://datalakeank01.dfs.core.windows.net/"
+		},
+		"git_connection_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com"
+		},
+		"project01-synapse-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://defaultstoragesynapse.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
