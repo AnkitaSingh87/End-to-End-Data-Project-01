@@ -1,0 +1,17 @@
+{
+	"name": "External table_gold",
+	"properties": {
+		"content": {
+			"query": "\n------CREDENTIAL-------\nCREATE DATABASE SCOPED CREDENTIAL cred_ank\nWITH \nIDENTITY = 'Managed Identity'\n\n------EXTERNAL DATA SOURCE------\nCREATE EXTERNAL DATA SOURCE sourc_silver\nWITH(\n    LOCATION ='https://datalakeank01.dfs.core.windows.net/silver',\n    CREDENTIAL=cred_ank\n)\n\nCREATE EXTERNAL DATA SOURCE source_gold\nWITH(\n    LOCATION ='https://datalakeank01.dfs.core.windows.net/gold',\n    CREDENTIAL=cred_ank\n)\n\n--------EXTERNAL FILE FORMAT------\n\nCREATE EXTERNAL FILE FORMAT format_parquet\nWITH (\n         FORMAT_TYPE = PARQUET, \n         DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'\n      )\n\n-------------CREATE EXTERNAL TABLE\n\nCREATE EXTERNAL TABLE gold.extproduct\nWITH\n(\n    LOCATION='extproduct',\n    DATA_SOURCE= source_gold,\n    FILE_FORMAT=format_parquet\n\n)AS\nSELECT * FROM gold.products\n\nSELECT * FROM gold.extproduct\n\n\n\n\n\n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "projectdatabase",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
