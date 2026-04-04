@@ -1,4 +1,4 @@
-**End To End Data Project**
+**📦Product Analysis Project**
 -----------
 
 This project demonstrates the design and implementation of a dynamic data pipeline using Databricks. The pipeline ingests raw product data, performs transformations, and generates analytical dashboards for business insights. It showcases how Databricks can be leveraged for scalable ETL, data modeling, and visualization
