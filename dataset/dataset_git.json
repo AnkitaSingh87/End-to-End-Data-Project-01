@@ -2,7 +2,7 @@
 	"name": "dataset_git",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "git_connection",
+			"referenceName": "HttpServer1",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {

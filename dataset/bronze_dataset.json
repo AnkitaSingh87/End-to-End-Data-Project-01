@@ -5,13 +5,27 @@
 			"referenceName": "datalake",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"folder_name": {
+				"type": "string"
+			},
+			"File_name": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "InsuranceData.csv",
-				"folderPath": "Insurance",
+				"fileName": {
+					"value": "@dataset().File_name",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().folder_name",
+					"type": "Expression"
+				},
 				"fileSystem": "bronze"
 			},
 			"columnDelimiter": ",",
